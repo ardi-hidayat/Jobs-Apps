@@ -1,16 +1,10 @@
-# job_apps
+# Job Apps
 
-A new Flutter project.
+- Memahami Slicing UI Design ke Real Project Flutter
+- Memahami Widget pada Flutter
+- Membangun Aplikasi dengan Flutter
 
 ## Getting Started
+- [Jobs App](https://buildwithangga.com/kelas/mastering-ui-design-to-flutter-jobs-app?&main_leads=journey)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
