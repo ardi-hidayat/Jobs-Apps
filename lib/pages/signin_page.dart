@@ -4,6 +4,8 @@ import 'package:job_apps/pages/signup_page.dart';
 import 'package:job_apps/theme.dart';
 import 'package:email_validator/email_validator.dart';
 
+import 'home_page.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
 
@@ -145,7 +147,13 @@ class _SignInPageState extends State<SignInPage> {
                           backgroundColor: Color(0xff4141A4),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(66))),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
+                      },
                       child: Text(
                         'Sign In',
                         style: buttonTextStyle,

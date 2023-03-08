@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:job_apps/pages/home_page.dart';
 import 'package:job_apps/pages/signin_page.dart';
 import 'package:job_apps/theme.dart';
 
@@ -235,7 +236,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         borderRadius: BorderRadius.circular(66),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                      );
+                    },
                     child: Text(
                       'Sign Up',
                       style: buttonTextStyle,

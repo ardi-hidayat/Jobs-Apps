@@ -12,3 +12,9 @@ TextStyle subTitleTextStyle = GoogleFonts.poppins(
 
 TextStyle buttonTextStyle = GoogleFonts.poppins(
     color: Color(0xffFFFFFF), fontSize: 14, fontWeight: FontWeight.w500);
+
+TextStyle jobTextStyle = GoogleFonts.poppins(
+    color: Color(0xff272C2F), fontSize: 16, fontWeight: FontWeight.w500);
+
+TextStyle companyTextStyle = GoogleFonts.poppins(
+    color: Color(0xffB3B5C4), fontSize: 14, fontWeight: FontWeight.w400);
