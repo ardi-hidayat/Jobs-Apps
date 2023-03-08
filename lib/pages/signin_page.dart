@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:job_apps/pages/signup_page.dart';
 import 'package:job_apps/theme.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -154,12 +155,21 @@ class _SignInPageState extends State<SignInPage> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, bottom: 80.0),
                     child: Center(
-                      child: Text(
-                        'Create New Account',
-                        style: GoogleFonts.poppins(
-                            color: Color(0xffB3B5C4),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()),
+                          );
+                        },
+                        child: Text(
+                          'Create New Account',
+                          style: GoogleFonts.poppins(
+                              color: Color(0xffB3B5C4),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w300),
+                        ),
                       ),
                     ),
                   )
