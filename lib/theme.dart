@@ -9,3 +9,6 @@ TextStyle titleTextStyle = GoogleFonts.poppins(
 
 TextStyle subTitleTextStyle = GoogleFonts.poppins(
     color: Color(0xff272C2F), fontSize: 24, fontWeight: FontWeight.w600);
+
+TextStyle buttonTextStyle = GoogleFonts.poppins(
+    color: Color(0xffFFFFFF), fontSize: 14, fontWeight: FontWeight.w500);
