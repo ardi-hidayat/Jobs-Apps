@@ -52,13 +52,7 @@ class HomePage extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 24),
-              child: Text(
-                'Hot Categories',
-                style: GoogleFonts.poppins(
-                    color: Color(0xff272C2F),
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
+              child: Text('Hot Categories', style: titleListTextStyle),
             ),
             SizedBox(
               height: 16,
