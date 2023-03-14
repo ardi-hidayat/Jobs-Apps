@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_apps/models/category_model.dart';
+import 'package:job_apps/models/job_model.dart';
 import 'package:job_apps/providers/category_provider.dart';
+import 'package:job_apps/providers/job_provider.dart';
 import 'package:job_apps/providers/user_provider.dart';
 import 'package:job_apps/theme.dart';
 import 'package:job_apps/widgets/custom_list.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var userProvider = Provider.of<UserProvider>(context);
     var categoryProvider = Provider.of<CategoryProvider>(context);
+    var jobProvider = Provider.of<JobProvider>(context);
 
     Widget header() {
       return SafeArea(
@@ -73,9 +76,7 @@ class HomePage extends StatelessWidget {
                       return ListView(
                         scrollDirection: Axis.horizontal,
                         children: snapshot.data!
-                            .map((category) => JobCard(
-                                text: category.name,
-                                imageUrl: category.imageUrl))
+                            .map((category) => JobCard(category))
                             .toList(),
                       );
                     }
@@ -88,7 +89,9 @@ class HomePage extends StatelessWidget {
               height: 30,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 24.0),
+              padding: const EdgeInsets.only(
+                left: 24.0,
+              ),
               child: Text(
                 'Just Post',
                 style: GoogleFonts.poppins(
@@ -98,26 +101,22 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 24.0),
-              child: CustomList(
-                  jobTitle: 'Front-End Developer',
-                  imageUrl: 'assets/google_icon.png',
-                  companyName: 'Google'),
+            SizedBox(
+              height: 30,
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 24.0),
-              child: CustomList(
-                  jobTitle: 'UI Designer',
-                  imageUrl: 'assets/instagram_icon.png',
-                  companyName: 'Instagram'),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, left: 24.0),
-              child: CustomList(
-                  jobTitle: 'Data Scientist',
-                  imageUrl: 'assets/facebook_icon.png',
-                  companyName: 'Facebook'),
+            FutureBuilder<List<JobModel>>(
+              future: jobProvider.getJobs(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  return Column(
+                    children:
+                        snapshot.data!.map((job) => CustomList(job)).toList(),
+                  );
+                }
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
             ),
           ],
         ),

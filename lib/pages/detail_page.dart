@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:job_apps/models/job_model.dart';
 import 'package:job_apps/theme.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final JobModel job;
+  DetailPage(this.job);
+
+  //const DetailPage({super.key});
 
   @override
   State<DetailPage> createState() => _DetailPageState();
@@ -11,6 +15,33 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   bool isApplied = false;
+
+  Widget detailItem(String text) {
+    return Container(
+      margin: EdgeInsets.only(
+        top: 16,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            Icons.adjust,
+            color: Color(0xff4141A4),
+            size: 12,
+          ),
+          SizedBox(
+            width: 8,
+          ),
+          Expanded(
+            child: Text(
+              text,
+              style: requirmentTextStyle,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget applyButton() {
     return Center(
@@ -107,8 +138,8 @@ class _DetailPageState extends State<DetailPage> {
                 height: 80,
               ),
               isApplied ? successMessage() : SizedBox(),
-              Image.asset(
-                'assets/google_icon.png',
+              Image.network(
+                widget.job.companyLogo,
                 width: 60,
                 height: 60,
               ),
@@ -116,11 +147,11 @@ class _DetailPageState extends State<DetailPage> {
                 height: 20,
               ),
               Text(
-                'Front-End Developer',
+                widget.job.companyName,
                 style: jobApplyTextStyle,
               ),
               Text(
-                'Google, Inc • Jakarta',
+                "${widget.job.companyName} • '${widget.job.location}",
                 style: companyTextStyle,
               ),
               Padding(
@@ -144,44 +175,9 @@ class _DetailPageState extends State<DetailPage> {
                       height: 16,
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Full-Time On Site',
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Start at \$18,000 per month',
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                      ],
+                      children: widget.job.about
+                          .map((text) => detailItem(text))
+                          .toList(),
                     ),
                     SizedBox(
                       height: 30,
@@ -198,63 +194,9 @@ class _DetailPageState extends State<DetailPage> {
                       height: 16,
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              "Candidate must possess at least a \nBachelor's Degree",
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Able to use Microsoft Office and Google \nbased service.',
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Have an excellent time management, \ngood at organized and details',
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                      ],
+                      children: widget.job.qualifications
+                          .map((text) => detailItem(text))
+                          .toList(),
                     ),
                     SizedBox(
                       height: 30,
@@ -272,44 +214,9 @@ class _DetailPageState extends State<DetailPage> {
                       height: 16,
                     ),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Initiate and promote any programs, events, \ntraining, or activities.',
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Row(
-                          children: [
-                            Image.asset(
-                              'assets/dot.png',
-                              width: 12,
-                              height: 12,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Assessing and anticipating needs and \ncollaborate with Division.',
-                              style: requirmentTextStyle,
-                            ),
-                          ],
-                        ),
-                      ],
+                      children: widget.job.responsibilities
+                          .map((text) => detailItem(text))
+                          .toList(),
                     ),
                     isApplied ? cancelApply() : applyButton(),
                     Center(
