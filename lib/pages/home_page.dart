@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:job_apps/models/category_model.dart';
+import 'package:job_apps/providers/category_provider.dart';
+import 'package:job_apps/providers/user_provider.dart';
 import 'package:job_apps/theme.dart';
 import 'package:job_apps/widgets/custom_list.dart';
 import 'package:job_apps/widgets/job_card.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var userProvider = Provider.of<UserProvider>(context);
+    var categoryProvider = Provider.of<CategoryProvider>(context);
+
     Widget header() {
       return SafeArea(
         child: Container(
@@ -24,7 +31,7 @@ class HomePage extends StatelessWidget {
                       style: titleTextStyle,
                     ),
                     Text(
-                      'Jason Powell',
+                      userProvider.user.name,
                       style: subTitleTextStyle,
                     ),
                   ],
@@ -57,32 +64,25 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 16,
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 24,
-                ),
-                child: Row(
-                  children: [
-                    JobCard(
-                        text: 'Website Developer',
-                        imageUrl: 'assets/card_category.png'),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    JobCard(
-                        text: 'Mobile Developer',
-                        imageUrl: 'assets/card_category2.png'),
-                    SizedBox(
-                      width: 16,
-                    ),
-                    JobCard(
-                        text: 'App Designer',
-                        imageUrl: 'assets/card_category3.png')
-                  ],
-                ),
-              ),
+            Container(
+              height: 200,
+              child: FutureBuilder<List<CategoryModel>>(
+                  future: categoryProvider.getCategories(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      return ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: snapshot.data!
+                            .map((category) => JobCard(
+                                text: category.name,
+                                imageUrl: category.imageUrl))
+                            .toList(),
+                      );
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }),
             ),
             SizedBox(
               height: 30,

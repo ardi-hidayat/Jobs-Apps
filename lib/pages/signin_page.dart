@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:job_apps/models/user_model.dart';
 import 'package:job_apps/pages/signup_page.dart';
+import 'package:job_apps/providers/auth_provider.dart';
+import 'package:job_apps/providers/user_provider.dart';
 import 'package:job_apps/theme.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:provider/provider.dart';
 
 import 'home_page.dart';
 
@@ -14,12 +18,22 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  bool isEmailValid = true;
-
   TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
+
+  bool isEmailValid = true;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    var authProvider = Provider.of<AuthProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+
+    void showError(String message) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(backgroundColor: Colors.red, content: Text(message)));
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -120,6 +134,7 @@ class _SignInPageState extends State<SignInPage> {
                     height: 8,
                   ),
                   TextFormField(
+                    controller: passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
                       fillColor: Color(0xffF1F0F5),
@@ -142,23 +157,49 @@ class _SignInPageState extends State<SignInPage> {
                   Container(
                     width: 400,
                     height: 50,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                          backgroundColor: Color(0xff4141A4),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(66))),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                        );
-                      },
-                      child: Text(
-                        'Sign In',
-                        style: buttonTextStyle,
-                      ),
-                    ),
+                    child: isLoading
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : TextButton(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Color(0xff4141A4),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(66))),
+                            onPressed: () async {
+                              if (emailController.text.isEmpty ||
+                                  passwordController.text.isEmpty) {
+                                showError('Semua field harus di isi');
+                              } else {
+                                setState(() {
+                                  isLoading = true;
+                                });
+
+                                UserModel? user = await authProvider.login(
+                                    emailController.text,
+                                    passwordController.text);
+
+                                setState(() {
+                                  isLoading = false;
+                                });
+
+                                if (user == null) {
+                                  showError('Email atau password salah');
+                                } else {
+                                  userProvider.user = user;
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const HomePage()),
+                                  );
+                                }
+                              }
+                            },
+                            child: Text(
+                              'Sign In',
+                              style: buttonTextStyle,
+                            ),
+                          ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0, bottom: 80.0),

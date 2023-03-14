@@ -24,25 +24,28 @@ class JobCard extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        width: 150,
-        height: 200,
-        child: Align(
-          alignment: Alignment.bottomLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, bottom: 15, right: 10),
-            child: Text(
-              text,
-              style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 24),
+        child: Container(
+          width: 150,
+          height: 200,
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, bottom: 15, right: 10),
+              child: Text(
+                text,
+                style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ),
-        ),
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(imageUrl),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(imageUrl),
+            ),
           ),
         ),
       ),

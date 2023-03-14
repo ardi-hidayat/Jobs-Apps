@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_apps/pages/signin_page.dart';
+import 'package:job_apps/pages/signup_page.dart';
 
 class StartedPage extends StatelessWidget {
   const StartedPage({super.key});
@@ -53,7 +54,13 @@ class StartedPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(66),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()),
+                          );
+                        },
                         child: Text(
                           'Get Started',
                           style: GoogleFonts.poppins(
