@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:job_apps/models/user_model.dart';
-import 'package:job_apps/pages/signup_page.dart';
 import 'package:job_apps/providers/auth_provider.dart';
 import 'package:job_apps/providers/user_provider.dart';
 import 'package:job_apps/theme.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:provider/provider.dart';
-
-import 'home_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
