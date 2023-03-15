@@ -187,11 +187,16 @@ class _SignInPageState extends State<SignInPage> {
                                   showError('Email atau password salah');
                                 } else {
                                   userProvider.user = user;
-                                  Navigator.push(
+                                  Navigator.pushNamedAndRemoveUntil(
                                     context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const HomePage()),
+                                    '/home',
+                                    (route) => false,
                                   );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) => const HomePage()),
+                                  // );
                                 }
                               }
                             },
@@ -206,11 +211,12 @@ class _SignInPageState extends State<SignInPage> {
                     child: Center(
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpPage()),
-                          );
+                          Navigator.pushNamed(context, '/sign-up');
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const SignUpPage()),
+                          // );
                         },
                         child: Text(
                           'Create New Account',

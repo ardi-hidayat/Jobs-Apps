@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:job_apps/pages/home_page.dart';
+import 'package:job_apps/pages/signin_page.dart';
+import 'package:job_apps/pages/signup_page.dart';
 import 'package:job_apps/pages/splash_page.dart';
+import 'package:job_apps/pages/started_page.dart';
 import 'package:job_apps/providers/auth_provider.dart';
 import 'package:job_apps/providers/category_provider.dart';
 import 'package:job_apps/providers/job_provider.dart';
@@ -27,7 +31,14 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashPage(),
+        //home: SplashPage(),
+        routes: {
+          '/': (context) => SplashPage(),
+          '/onboarding': (context) => StartedPage(),
+          '/sign-in': (context) => SignInPage(),
+          '/sign-up': (context) => SignUpPage(),
+          '/home': (context) => HomePage(),
+        },
       ),
     );
   }

@@ -290,11 +290,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       showError('Email sudah terdaftar');
                     } else {
                       userProvider.user = user;
-                      Navigator.push(
+                      Navigator.pushNamedAndRemoveUntil(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const HomePage()),
+                        '/home',
+                        (route) => false,
                       );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const HomePage()),
+                      // );
                     }
                   }
                 },
@@ -312,10 +317,11 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Center(
           child: InkWell(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SignInPage()),
-              );
+              Navigator.pushNamed(context, '/sign-in');
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const SignInPage()),
+              // );
             },
             child: Text(
               'Back to Sign In',

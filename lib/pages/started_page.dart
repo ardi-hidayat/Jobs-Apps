@@ -55,11 +55,12 @@ class StartedPage extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const SignUpPage()),
-                          );
+                          Navigator.pushNamed(context, '/sign-up');
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const SignUpPage()),
+                          // );
                         },
                         child: Text(
                           'Get Started',
@@ -80,11 +81,12 @@ class StartedPage extends StatelessWidget {
                       height: 45,
                       child: OutlinedButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignInPage()),
-                            );
+                            Navigator.pushNamed(context, '/sign-in');
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => const SignInPage()),
+                            // );
                           },
                           style: OutlinedButton.styleFrom(
                               side: BorderSide(color: Colors.white),
