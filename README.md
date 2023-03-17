@@ -7,8 +7,8 @@
 
 
 # Provider State Management
-- Belajar lebih dalam State Management Provider
-- Belajar Consume API
+- State Management Provider
+- Consume API
 ## Getting Started
 - [Jobs Apps](https://buildwithangga.com/kelas/flutter-developer-provider-state-management)
 
